@@ -53,8 +53,6 @@ module Douglas; module NE; module Checks
           offset += 1
         end
 
-        #puts "[#{idx}]: #{fund_rows},#{org_rows} #{cols.length}"
-
         # finally, data, pick it all out!
         values = cols.drop(offset).map(&:text)
         @funds[fund][org] << {
@@ -73,6 +71,8 @@ module Douglas; module NE; module Checks
 
       end
 
+    rescue
+      raise ArgumentError, 'File does not appear to be a Supplier Checks Report by Department report'
     end
 
   end
