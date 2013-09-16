@@ -13,38 +13,38 @@ We can have this:
       "11111 - GENERAL" => {
         "501015 - REAL ESTATE APPRAISE" => [
           [0] {
-          :supplier => "COSTAR REALTY INFORMATION INC",
-          :account => "42411 - MAINTENANCE CONTRACT",
-          :description => "COSTAR GROUP, INC - Inv. 102152750 (August)",
-          :invoice => "102152750",
-          :check_number => 363593,
-          :check_date => #<Date: 2013-09-10 ((2456546j,0s,0n),+0s,2299161j)>,
-          :check_status => "NEGOTIABLE",
-          :amount => 500.0
+            :supplier => "COSTAR REALTY INFORMATION INC",
+            :account => "42411 - MAINTENANCE CONTRACT",
+            :description => "COSTAR GROUP, INC - Inv. 102152750 (August)",
+            :invoice => "102152750",
+            :check_number => 363593,
+            :check_date => #<Date: 2013-09-10 ((2456546j,0s,0n),+0s,2299161j)>,
+            :check_status => "NEGOTIABLE",
+            :amount => 500.0
           }
         ],
         "502011 - ADMIN COUNTY CLERK" => [
           [0] {
-          :supplier => "TOSHIBA FINANCIAL SERVICES",
-          :account => "42471 - LEASE COPY MACHINES",
-          :description => "CO CLERK S/N CEI02847 ESTUDIO 855/CONTRACT 500-279467-000",
-          :invoice => "233826767",
-          :check_number => 363494,
-          :check_date => #<Date: 2013-09-10 ((2456546j,0s,0n),+0s,2299161j)>,
-          :check_status => "NEGOTIABLE",
-          :amount => 334.72
+            :supplier => "TOSHIBA FINANCIAL SERVICES",
+            :account => "42471 - LEASE COPY MACHINES",
+            :description => "CO CLERK S/N CEI02847 ESTUDIO 855/CONTRACT 500-279467-000",
+            :invoice => "233826767",
+            :check_number => 363494,
+            :check_date => #<Date: 2013-09-10 ((2456546j,0s,0n),+0s,2299161j)>,
+            :check_status => "NEGOTIABLE",
+            :amount => 334.72
           }
         ],
         "502012 - RECORDS COUNTY CLERK" => [
           [0] {
-          :supplier => "DOT COMM",
-          :account => "42411 - MAINTENANCE CONTRACT",
-          :description => "PSI Capture annual maintenance.",
-          :invoice => "93311",
-          :check_number => 363484,
-          :check_date => #<Date: 2013-09-10 ((2456546j,0s,0n),+0s,2299161j)>,
-          :check_status => "NEGOTIABLE",
-          :amount => 575.0
+            :supplier => "DOT COMM",
+            :account => "42411 - MAINTENANCE CONTRACT",
+            :description => "PSI Capture annual maintenance.",
+            :invoice => "93311",
+            :check_number => 363484,
+            :check_date => #<Date: 2013-09-10 ((2456546j,0s,0n),+0s,2299161j)>,
+            :check_status => "NEGOTIABLE",
+            :amount => 575.0
           }
         ],
         # ...
