@@ -25,58 +25,47 @@ module Douglas; module NE; module Checks
       table.children.each_with_index do |row, idx|
         next if idx == 0 || idx == table.children.length - 1
 
-        offset = 0
         cols = row.children
-        if fund_rows == 0
-          fund_rows = cols[0]['rowspan'].to_i + 1
+        if cols.last.text.include? 'TOTAL'
+          fund_rows -= 1
+          next
+        end
+
+        offset = 0
+        if fund_rows <= 0
+          fund_rows = cols[0]['rowspan'].to_i
           fund = cols[0].text.strip
-          dump[fund] = {}
+          @dump[fund] = {}
           offset += 1
         end
 
         if org_rows == 0
-          org_rows = cols[0 + offset]['rowspan'].to_i + 1
+          org_rows = cols[0 + offset]['rowspan'].to_i
           org = cols[0 + offset].text.strip
-          dump[fund][org] = []
+          @dump[fund][org] = []
           offset += 1
         end
 
         #puts "[#{idx}]: #{fund_rows},#{org_rows} #{cols.length}"
 
-        if org_rows == 1
-          org_rows = 0
-        else
-          org_rows -= 1
-        end
-
-        if fund_rows <= 2
-          fund_rows = 0
-        else
-          fund_rows -= 1
-        end
-
-        if org_rows == 0 || fund_rows == 0
-          #puts "skipping: #{cols.text}"
-          next
-        end
-
         rest = cols.drop(offset)
         supplier, account, description, invoice, check_number, check_date, check_status, amount = rest.map(&:text)
 
-        dump[fund][org] << {
+        @dump[fund][org] << {
           supplier: supplier,
           account: account,
           description: description,
           invoice: invoice,
-          check_number: check_number,
+          check_number: check_number.to_i,
           check_date: check_date,
           check_status: check_status,
-          amount: amount#.gsub(/,/, '').to_f,
+          amount: amount.gsub(/,/, '').to_f,
         }
 
-      end
+        fund_rows -= 1
+        org_rows -= 1
 
-     # ap dump
+      end
 
     end
 
