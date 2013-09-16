@@ -5,7 +5,7 @@ module Douglas; module NE; module Checks
 
   class File
 
-    attr_reader :data
+    attr_reader :funds
 
     def initialize(uri)
 
@@ -16,7 +16,7 @@ module Douglas; module NE; module Checks
       table = doc.at_xpath('//body/table')
       header = table.children[0]
 
-      @data = {}
+      @funds = {}
 
       fund_rows = 0
       fund = nil
@@ -36,14 +36,14 @@ module Douglas; module NE; module Checks
           fund_rows = cols[0]['rowspan'].to_i
           org_rows = 0
           fund = cols[0].text.strip
-          @data[fund] = {}
+          @funds[fund] = {}
           offset += 1
         end
 
         if org_rows == 0
           org_rows = cols[0 + offset]['rowspan'].to_i
           org = cols[0 + offset].text.strip
-          @data[fund][org] = []
+          @funds[fund][org] = []
           offset += 1
         end
 
@@ -52,7 +52,7 @@ module Douglas; module NE; module Checks
         rest = cols.drop(offset)
         supplier, account, description, invoice, check_number, check_date, check_status, amount = rest.map(&:text)
 
-        @data[fund][org] << {
+        @funds[fund][org] << {
           supplier: supplier,
           account: account,
           description: description,

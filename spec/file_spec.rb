@@ -10,7 +10,7 @@ describe Douglas::NE::Checks::File do
 
   context '12532 - COUNTY ROAD' do
 
-    subject { @file.data['12532 - COUNTY ROAD'] }
+    subject { @file.funds['12532 - COUNTY ROAD'] }
 
     it { should have(3).keys }
 
@@ -20,13 +20,13 @@ describe Douglas::NE::Checks::File do
 
     context '670011 - DESIGN & SURVEY' do
 
-      subject { @file.data['12532 - COUNTY ROAD']['670011 - DESIGN & SURVEY'] }
+      subject { @file.funds['12532 - COUNTY ROAD']['670011 - DESIGN & SURVEY'] }
 
       it { should have(1).row }
 
       context 'row 0' do
 
-        subject { @file.data['12532 - COUNTY ROAD']['670011 - DESIGN & SURVEY'][0] }
+        subject { @file.funds['12532 - COUNTY ROAD']['670011 - DESIGN & SURVEY'][0] }
 
         it 'should have known values' do
           expect(subject[:supplier]).to eql('METROPOLITAN AREA PLANNING AGENCY')
@@ -45,7 +45,7 @@ describe Douglas::NE::Checks::File do
 
     context '672011 - MAINTENANCE' do
 
-      subject { @file.data['12532 - COUNTY ROAD']['672011 - MAINTENANCE'] }
+      subject { @file.funds['12532 - COUNTY ROAD']['672011 - MAINTENANCE'] }
 
       it { should have(30).rows }
 
@@ -53,7 +53,7 @@ describe Douglas::NE::Checks::File do
 
     context '674011 - EQUIPMENT' do
 
-      subject { @file.data['12532 - COUNTY ROAD']['674011 - EQUIPMENT'] }
+      subject { @file.funds['12532 - COUNTY ROAD']['674011 - EQUIPMENT'] }
 
       it { should have(2).rows }
 
