@@ -1,4 +1,4 @@
-# Douglas::Ne::Checks [![Build Status](https://travis-ci.org/code-lever/douglas-ne-checks.png)](https://travis-ci.org/code-lever/douglas-ne-checks) [![Dependency Status](https://gemnasium.com/code-lever/douglas-ne-checks.png)](https://gemnasium.com/code-lever/douglas-ne-checks) [![Code Climate](https://codeclimate.com/github/code-lever/douglas-ne-checks.png)](https://codeclimate.com/github/code-lever/douglas-ne-checks)
+# Douglas::NE::Checks [![Build Status](https://travis-ci.org/code-lever/douglas-ne-checks.png)](https://travis-ci.org/code-lever/douglas-ne-checks) [![Dependency Status](https://gemnasium.com/code-lever/douglas-ne-checks.png)](https://gemnasium.com/code-lever/douglas-ne-checks) [![Code Climate](https://codeclimate.com/github/code-lever/douglas-ne-checks.png)](https://codeclimate.com/github/code-lever/douglas-ne-checks)
 
 TODO: Write a gem description
 
