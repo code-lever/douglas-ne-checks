@@ -9,28 +9,33 @@ module Douglas; module NE; module Checks
 
     def initialize(uri)
 
-      doc = Nokogiri::HTML(open(uri))
-
-      title = doc.at_xpath('//discotitlexhtml')
-
-      table = doc.at_xpath('//body/table')
-      header = table.children[0]
-
       @funds = {}
 
+      # open the file and snag the two main elements
+      doc = Nokogiri::HTML(open(uri))
+      title = doc.at_xpath('//discotitlexhtml')
+      table = doc.at_xpath('//body/table')
+
+      # initialize the state tracking variables
       fund_rows = 0
       fund = nil
       org_rows = 0
       org = nil
+
       table.children.each_with_index do |row, idx|
-        next if idx == 0 || idx == table.children.length - 1
+
+        # first row is a header
+        next if idx == 0
 
         cols = row.children
+
+        # rows with TOTAL don't include useful data
         if cols.last.text.include? 'TOTAL'
           fund_rows -= 1
           next
         end
 
+        # first cell has number of rows for the fund, if we're not already in one
         offset = 0
         if fund_rows <= 0
           fund_rows = cols[0]['rowspan'].to_i
@@ -40,6 +45,7 @@ module Douglas; module NE; module Checks
           offset += 1
         end
 
+        # second cell has number of rows for the organization, if we're not already in one
         if org_rows == 0
           org_rows = cols[0 + offset]['rowspan'].to_i
           org = cols[0 + offset].text.strip
@@ -49,18 +55,17 @@ module Douglas; module NE; module Checks
 
         #puts "[#{idx}]: #{fund_rows},#{org_rows} #{cols.length}"
 
-        rest = cols.drop(offset)
-        supplier, account, description, invoice, check_number, check_date, check_status, amount = rest.map(&:text)
-
+        # finally, data, pick it all out!
+        values = cols.drop(offset).map(&:text)
         @funds[fund][org] << {
-          supplier: supplier,
-          account: account,
-          description: description,
-          invoice: invoice,
-          check_number: check_number.to_i,
-          check_date: Date.parse(check_date),
-          check_status: check_status,
-          amount: amount.gsub(/,/, '').to_f,
+          supplier: values[0],
+          account: values[1],
+          description: values[2],
+          invoice: values[3],
+          check_number: values[4].to_i,
+          check_date: Date.parse(values[5]),
+          check_status: values[6],
+          amount: values[7].gsub(/,/, '').to_f,
         }
 
         fund_rows -= 1
