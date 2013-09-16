@@ -67,9 +67,6 @@ Where the basic structure is:
       "FUND 2" => { ... }
     }
 
-
-* http://hackomaha.mindmixer.com/identifying-hack-omaha-projects/make-a-government-checkbook-app
-
 ## Installation
 
 Add this line to your application's Gemfile:
