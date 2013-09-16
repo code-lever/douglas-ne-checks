@@ -7,6 +7,20 @@ describe Douglas::NE::Checks::File do
     @file9 = Douglas::NE::Checks::File.new(data_file('2013-09-09.htm'))
   end
 
+  describe '#funds' do
+
+    context '2013-09-09.htm' do
+
+      subject { @file9.fund_names }
+
+      it { should be_a(Array) }
+
+      it { should have(12).entries }
+
+    end
+
+  end
+
   describe '#fund_names' do
 
     context '2013-06-04.htm' do
@@ -48,6 +62,46 @@ describe Douglas::NE::Checks::File do
         expect(file.fund('12535 - FEDERAL DRUG FORFEITURE')).to_not be_nil
         expect(file.fund('12535 - FEDERAL DRUG FORFEITURE')).to be_a(Hash)
       end
+
+    end
+
+  end
+
+  describe '#organizations' do
+
+    context '2013-09-09.htm' do
+
+      subject { @file9.organizations('11111 - GENERAL') }
+
+      it { should be_a(Array) }
+
+      it { should have(62).entries }
+
+    end
+
+  end
+
+  describe '#organization_names' do
+
+    context '2013-06-04.htm' do
+
+      subject { @file6.organization_names('11111 - GENERAL') }
+
+      it { should be_a(Array) }
+
+      it { should have(74).names }
+
+    end
+
+  end
+
+  describe '#organization' do
+
+    context '2013-06-04.htm' do
+
+      subject { @file6.organization('11111 - GENERAL', '582015 - NOXIOUS WEED CONTROL') }
+
+      it { should be_a(Hash) }
 
     end
 

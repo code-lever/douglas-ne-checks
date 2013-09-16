@@ -75,12 +75,28 @@ module Douglas; module NE; module Checks
       raise ArgumentError, 'File does not appear to be a Supplier Checks Report by Department report'
     end
 
+    def funds
+      raw_data[:funds]
+    end
+
     def fund_names
-      @raw_data[:funds].map { |f| f[:name] }
+      funds.map { |f| f[:name] }
     end
 
     def fund(name)
-      @raw_data[:funds].find { |f| f[:name] == name }
+      funds.find { |f| f[:name] == name }
+    end
+
+    def organizations(fund_name)
+      fund(fund_name)[:organizations]
+    end
+
+    def organization_names(fund_name)
+      organizations(fund_name).map { |o| o[:name] }
+    end
+
+    def organization(fund_name, organization_name)
+      organizations(fund_name).find { |o| o[:name] == organization_name}
     end
 
   end
