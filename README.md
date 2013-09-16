@@ -2,7 +2,9 @@
 
 TODO: Write a gem description
 
-* http://www.douglascountyclerk.org/images/stories/supplierchecks/2013-09-10%20Supplier%20Checks%20by%20dept.htm
+* http://www.douglascountyclerk.org/supplierchecks
+
+* Focusing on "Supplier Checks Report by Department"...
 
 ## Installation
 
