@@ -57,7 +57,7 @@ module Douglas; module NE; module Checks
           description: description,
           invoice: invoice,
           check_number: check_number.to_i,
-          check_date: check_date,
+          check_date: Date.parse(check_date),
           check_status: check_status,
           amount: amount.gsub(/,/, '').to_f,
         }

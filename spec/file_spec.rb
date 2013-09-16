@@ -34,7 +34,7 @@ describe Douglas::NE::Checks::File do
           expect(subject[:description]).to eql('INV 2608 (NIROC FUNDING)')
           expect(subject[:invoice]).to eql('2603')
           expect(subject[:check_number]).to eql(363827)
-          expect(subject[:check_date]).to eql('10-SEP-2013')
+          expect(subject[:check_date]).to eql(Date.new(2013, 9, 10))
           expect(subject[:check_status]).to eql('NEGOTIABLE')
           expect(subject[:amount]).to be_within(0.01).of(25000.00)
         end
