@@ -5,7 +5,7 @@ require 'douglas/ne/checks/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "douglas-ne-checks"
-  spec.version       = Douglas::Ne::Checks::VERSION
+  spec.version       = Douglas::NE::Checks::VERSION
   spec.authors       = ["Nick Veys"]
   spec.email         = ["nick@codelever.com"]
   spec.description   = %q{Read and convert Douglas County NE check dumps to something more useful.}
