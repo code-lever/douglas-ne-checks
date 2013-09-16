@@ -52,9 +52,23 @@ We can have this:
       # ...
     }
 
-* http://www.douglascountyclerk.org/supplierchecks
+Where the basic structure is:
+
+    {
+      "FUND 1" => {
+        "ORGANIZATION 1" => [
+          [0] { entry 0 },
+          [1] { entry 0 }
+        ],
+        "ORGANIZATION 2" => [
+          [0] { entry 0 }
+        ],
+      }
+      "FUND 2" => { ... }
+    }
+
+
 * http://hackomaha.mindmixer.com/identifying-hack-omaha-projects/make-a-government-checkbook-app
-* Focusing on "Supplier Checks Report by Department"...
 
 ## Installation
 
