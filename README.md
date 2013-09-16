@@ -3,7 +3,7 @@
 TODO: Write a gem description
 
 * http://www.douglascountyclerk.org/supplierchecks
-
+* http://hackomaha.mindmixer.com/identifying-hack-omaha-projects/make-a-government-checkbook-app
 * Focusing on "Supplier Checks Report by Department"...
 
 ## Installation
