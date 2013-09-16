@@ -34,6 +34,7 @@ module Douglas; module NE; module Checks
         offset = 0
         if fund_rows <= 0
           fund_rows = cols[0]['rowspan'].to_i
+          org_rows = 0
           fund = cols[0].text.strip
           @data[fund] = {}
           offset += 1
