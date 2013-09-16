@@ -5,11 +5,11 @@ module Douglas; module NE; module Checks
 
   class File
 
-    attr_reader :funds
+    attr_reader :raw_data
 
     def initialize(uri)
 
-      @funds = {}
+      @raw_data = { funds: [] }
 
       # open the file and snag the two main elements
       doc = Nokogiri::HTML(open(uri))
@@ -41,7 +41,7 @@ module Douglas; module NE; module Checks
           fund_rows = cols[0]['rowspan'].to_i
           org_rows = 0
           fund = cols[0].text.strip
-          @funds[fund] = {}
+          @raw_data[:funds] << { name: fund, organizations: [] }
           offset += 1
         end
 
@@ -49,13 +49,13 @@ module Douglas; module NE; module Checks
         if org_rows == 0
           org_rows = cols[0 + offset]['rowspan'].to_i
           org = cols[0 + offset].text.strip
-          @funds[fund][org] = []
+          @raw_data[:funds].last[:organizations] << { name: org, entries: [] }
           offset += 1
         end
 
         # finally, data, pick it all out!
         values = cols.drop(offset).map(&:text)
-        @funds[fund][org] << {
+        @raw_data[:funds].last[:organizations].last[:entries] << {
           supplier: values[0],
           account: values[1],
           description: values[2],
@@ -73,6 +73,14 @@ module Douglas; module NE; module Checks
 
     rescue
       raise ArgumentError, 'File does not appear to be a Supplier Checks Report by Department report'
+    end
+
+    def fund_names
+      @raw_data[:funds].map { |f| f[:name] }
+    end
+
+    def fund(name)
+      @raw_data[:funds].find { |f| f[:name] == name }
     end
 
   end

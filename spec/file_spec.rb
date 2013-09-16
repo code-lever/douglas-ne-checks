@@ -2,109 +2,165 @@ require 'spec_helper'
 
 describe Douglas::NE::Checks::File do
 
-  describe '#funds' do
+  before(:all) do
+    @file6 = Douglas::NE::Checks::File.new(data_file('2013-06-04.htm'))
+    @file9 = Douglas::NE::Checks::File.new(data_file('2013-09-09.htm'))
+  end
+
+  describe '#fund_names' do
 
     context '2013-06-04.htm' do
 
-      before(:all) do
-        @file = Douglas::NE::Checks::File.new(data_file('2013-06-04.htm'))
-      end
+      subject { @file6.fund_names }
 
-      subject { @file.funds }
-
-      it { should have(12).keys }
+      it { should have(12).names }
 
     end
 
     context '2013-09-09.htm' do
 
-      before(:all) do
-        @file = Douglas::NE::Checks::File.new(data_file('2013-09-09.htm'))
+      subject { @file9.fund_names }
+
+      it { should have(12).names }
+
+    end
+
+  end
+
+  describe '#fund' do
+
+    context '2013-06-04.htm' do
+
+      let(:file) { @file6 }
+
+      it 'should have known funds' do
+        expect(file.fund('11111 - GENERAL')).to_not be_nil
+        expect(file.fund('11111 - GENERAL')).to be_a(Hash)
       end
 
-      subject { @file.funds }
+    end
 
-      it { should have(12).keys }
+    context '2013-09-09.htm' do
 
-      context '11111 - GENERAL' do
+      let(:file) { @file9 }
 
-        subject { @file.funds['11111 - GENERAL'] }
+      it 'should have known funds' do
+        expect(file.fund('12535 - FEDERAL DRUG FORFEITURE')).to_not be_nil
+        expect(file.fund('12535 - FEDERAL DRUG FORFEITURE')).to be_a(Hash)
+      end
 
-        it { should have(62).keys }
+    end
+
+  end
+
+  describe '#raw_data' do
+
+    context '2013-06-04.htm' do
+
+      let(:file) { @file6 }
+
+      subject { file.raw_data }
+
+      it_behaves_like 'raw data'
+
+      context '[:funds]' do
+
+        subject { file.raw_data[:funds] }
+
+        it_behaves_like 'raw data funds', 12
 
       end
 
-      context '12532 - COUNTY ROAD' do
+    end
 
-        subject { @file.funds['12532 - COUNTY ROAD'] }
+    context '2013-09-09.htm' do
 
-        it { should have(3).keys }
+      let(:file) { @file9 }
 
-        its(:keys) { should include('670011 - DESIGN & SURVEY') }
-        its(:keys) { should include('672011 - MAINTENANCE') }
-        its(:keys) { should include('674011 - EQUIPMENT') }
+      subject { file.raw_data }
 
-        context '670011 - DESIGN & SURVEY' do
+      it_behaves_like 'raw data'
 
-          subject { @file.funds['12532 - COUNTY ROAD']['670011 - DESIGN & SURVEY'] }
+      context '[:funds]' do
 
-          it { should have(1).row }
+        subject { file.raw_data[:funds] }
 
-          context 'row 0' do
+        it_behaves_like 'raw data funds', 12
 
-            subject { @file.funds['12532 - COUNTY ROAD']['670011 - DESIGN & SURVEY'][0] }
+        context '11111 - GENERAL' do
 
-            it 'should have known values' do
-              expect(subject[:supplier]).to eql('METROPOLITAN AREA PLANNING AGENCY')
-              expect(subject[:account]).to eql('42239 - PROFESSIONAL FEES - OTHER')
-              expect(subject[:description]).to eql('INV 2608 (NIROC FUNDING)')
-              expect(subject[:invoice]).to eql('2603')
-              expect(subject[:check_number]).to eql(363827)
-              expect(subject[:check_date]).to eql(Date.new(2013, 9, 10))
-              expect(subject[:check_status]).to eql('NEGOTIABLE')
-              expect(subject[:amount]).to be_within(0.01).of(25000.00)
+          it_behaves_like 'a raw data fund', 62
+
+        end
+
+        context '12532 - COUNTY ROAD' do
+
+          it_behaves_like 'a raw data fund', 3
+
+          context '670011 - DESIGN & SURVEY' do
+
+            it_behaves_like 'a raw data fund organization', 1
+
+            context 'entry 0' do
+
+              it_behaves_like 'a raw data fund organization entry', 0, {
+                supplier: 'METROPOLITAN AREA PLANNING AGENCY',
+                account: '42239 - PROFESSIONAL FEES - OTHER',
+                description: 'INV 2608 (NIROC FUNDING)',
+                invoice: '2603',
+                check_number: 363827,
+                check_date: Date.new(2013, 9, 10),
+                check_status: 'NEGOTIABLE',
+                amount: 25000.00
+              }
+
             end
+
+          end
+
+          context '672011 - MAINTENANCE' do
+
+            it_behaves_like 'a raw data fund organization', 30
+
+          end
+
+          context '674011 - EQUIPMENT' do
+
+            it_behaves_like 'a raw data fund organization', 2
 
           end
 
         end
 
-        context '672011 - MAINTENANCE' do
+        context '12516 - VETERANS' do
 
-          subject { @file.funds['12532 - COUNTY ROAD']['672011 - MAINTENANCE'] }
+          it_behaves_like 'a raw data fund', 1
 
-          it { should have(30).rows }
+          context '656011 - VETERANS' do
 
-        end
+            it_behaves_like 'a raw data fund organization', 1
 
-        context '674011 - EQUIPMENT' do
-
-          subject { @file.funds['12532 - COUNTY ROAD']['674011 - EQUIPMENT'] }
-
-          it { should have(2).rows }
+          end
 
         end
 
-      end
+        context '12582 - EMPLOYEE MEDICAL INS' do
 
-      context '12516 - VETERANS' do
+          it_behaves_like 'a raw data fund', 2
 
-        subject { @file.funds['12516 - VETERANS'] }
+          context '695011 - MED INSURANCE' do
 
-        it { should have(1).keys }
+            it_behaves_like 'a raw data fund organization', 3
 
-        its(:keys) { should include('656011 - VETERANS') }
+          end
 
-      end
+          context '695012 - WELLNESS' do
 
-      context '12582 - EMPLOYEE MEDICAL INS' do
+            it_behaves_like 'a raw data fund organization', 1
 
-        subject { @file.funds['12582 - EMPLOYEE MEDICAL INS'] }
+          end
 
-        it { should have(2).keys }
-
-        its(:keys) { should include('695011 - MED INSURANCE') }
-        its(:keys) { should include('695012 - WELLNESS') }
+        end
 
       end
 
