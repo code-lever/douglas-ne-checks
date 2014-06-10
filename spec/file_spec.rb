@@ -8,6 +8,16 @@ describe Douglas::NE::Checks::File do
     @file3 = Douglas::NE::Checks::File.new(data_file('2013-09-17.htm'))
   end
 
+  describe '.new' do
+
+    data_files.each do |f|
+      it "reads file #{f} successfully" do
+        described_class.new(f)
+      end
+    end
+
+  end
+
   describe '#funds' do
 
     context '2013-09-10.htm' do
