@@ -3,15 +3,36 @@ require 'spec_helper'
 describe Douglas::NE::Checks::File do
 
   before(:all) do
-    @file6 = Douglas::NE::Checks::File.new(data_file('2013-06-04.htm'))
-    @file9 = Douglas::NE::Checks::File.new(data_file('2013-09-09.htm'))
+    @file1 = Douglas::NE::Checks::File.new(data_file('2013-06-04.htm'))
+    @file2 = Douglas::NE::Checks::File.new(data_file('2013-09-10.htm'))
+    @file3 = Douglas::NE::Checks::File.new(data_file('2013-09-17.htm'))
+  end
+
+  describe '.new' do
+
+    data_files.each do |f|
+      it "reads file #{f} successfully" do
+        described_class.new(f)
+      end
+    end
+
   end
 
   describe '#funds' do
 
-    context '2013-09-09.htm' do
+    context '2013-09-10.htm' do
 
-      subject { @file9.fund_names }
+      subject { @file2.fund_names }
+
+      it { should be_a(Array) }
+
+      it { should have(12).entries }
+
+    end
+
+    context '2013-09-17.htm' do
+
+      subject { @file3.fund_names }
 
       it { should be_a(Array) }
 
@@ -25,15 +46,15 @@ describe Douglas::NE::Checks::File do
 
     context '2013-06-04.htm' do
 
-      subject { @file6.fund_names }
+      subject { @file1.fund_names }
 
       it { should have(12).names }
 
     end
 
-    context '2013-09-09.htm' do
+    context '2013-09-10.htm' do
 
-      subject { @file9.fund_names }
+      subject { @file2.fund_names }
 
       it { should have(12).names }
 
@@ -45,7 +66,7 @@ describe Douglas::NE::Checks::File do
 
     context '2013-06-04.htm' do
 
-      let(:file) { @file6 }
+      let(:file) { @file1 }
 
       it 'should have known funds' do
         expect(file.fund('11111 - GENERAL')).to_not be_nil
@@ -54,9 +75,9 @@ describe Douglas::NE::Checks::File do
 
     end
 
-    context '2013-09-09.htm' do
+    context '2013-09-10.htm' do
 
-      let(:file) { @file9 }
+      let(:file) { @file2 }
 
       it 'should have known funds' do
         expect(file.fund('12535 - FEDERAL DRUG FORFEITURE')).to_not be_nil
@@ -69,9 +90,9 @@ describe Douglas::NE::Checks::File do
 
   describe '#organizations' do
 
-    context '2013-09-09.htm' do
+    context '2013-09-10.htm' do
 
-      subject { @file9.organizations('11111 - GENERAL') }
+      subject { @file2.organizations('11111 - GENERAL') }
 
       it { should be_a(Array) }
 
@@ -85,7 +106,7 @@ describe Douglas::NE::Checks::File do
 
     context '2013-06-04.htm' do
 
-      subject { @file6.organization_names('11111 - GENERAL') }
+      subject { @file1.organization_names('11111 - GENERAL') }
 
       it { should be_a(Array) }
 
@@ -99,7 +120,7 @@ describe Douglas::NE::Checks::File do
 
     context '2013-06-04.htm' do
 
-      subject { @file6.organization('11111 - GENERAL', '582015 - NOXIOUS WEED CONTROL') }
+      subject { @file1.organization('11111 - GENERAL', '582015 - NOXIOUS WEED CONTROL') }
 
       it { should be_a(Hash) }
 
@@ -111,7 +132,7 @@ describe Douglas::NE::Checks::File do
 
     context '2013-06-04.htm' do
 
-      let(:file) { @file6 }
+      let(:file) { @file1 }
 
       subject { file.raw_data }
 
@@ -127,9 +148,9 @@ describe Douglas::NE::Checks::File do
 
     end
 
-    context '2013-09-09.htm' do
+    context '2013-09-10.htm' do
 
-      let(:file) { @file9 }
+      let(:file) { @file2 }
 
       subject { file.raw_data }
 

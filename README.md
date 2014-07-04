@@ -5,7 +5,7 @@ Inspired by [@OpenNebraska](https://twitter.com/OpenNebraska)'s presentation @ [
 
 This gem will convert (as of the time of writing, of course) the [HTML dumps of supplier's checks](http://www.douglascountyclerk.org/supplierchecks) that the Douglas County Clerk's office provides weekly.
 
-So instead of this: [2013-09-10 check dump](http://www.douglascountyclerk.org/images/stories/supplierchecks/2013-09-10%20Supplier%20Checks%20by%20dept.htm).
+So instead of this: [example check dump](http://www.douglascountyclerk.org/images/stories/4-1-2014%20Supplier%20Checks%20by%20Dept.htm).
 
 We can have a decent API, and if you want the fire hose you can have this (Ruby Hash):
 

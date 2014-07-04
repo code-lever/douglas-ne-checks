@@ -18,9 +18,7 @@ module Douglas; module NE; module Checks
 
       # initialize the state tracking variables
       fund_rows = 0
-      fund = nil
       org_rows = 0
-      org = nil
 
       table.children.each_with_index do |row, idx|
 
