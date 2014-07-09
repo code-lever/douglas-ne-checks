@@ -30,5 +30,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'simplecov-rcov'
   spec.add_development_dependency 'yard'
 
-  spec.add_dependency 'nokogiri', '~> 1.0'
+  # 1.6.2+ changed how some data is returned
+  spec.add_dependency 'nokogiri', '<= 1.6.1'
 end
