@@ -1,5 +1,5 @@
 # Douglas::NE::Checks
-[![Build Status](https://travis-ci.org/code-lever/douglas-ne-checks.png)](https://travis-ci.org/code-lever/douglas-ne-checks) [![Dependency Status](https://gemnasium.com/code-lever/douglas-ne-checks.png)](https://gemnasium.com/code-lever/douglas-ne-checks) [![Code Climate](https://codeclimate.com/github/code-lever/douglas-ne-checks.png)](https://codeclimate.com/github/code-lever/douglas-ne-checks)
+[![Build Status](https://travis-ci.org/code-lever/douglas-ne-checks.png)](https://travis-ci.org/code-lever/douglas-ne-checks) [![Code Climate](https://codeclimate.com/github/code-lever/douglas-ne-checks.png)](https://codeclimate.com/github/code-lever/douglas-ne-checks)
 
 Inspired by [@OpenNebraska](https://twitter.com/OpenNebraska)'s presentation @ [HOW Conf 2013](http://www.howconf.org), I figured I'd do a little civic hacking.
 
